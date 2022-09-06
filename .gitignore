@@ -11,7 +11,6 @@
 
 # Python ignores
 bin
-back/lib
 etc
 share
 include
@@ -22,9 +21,12 @@ src/ml/data/processed
 src/ml/data/unprocessed
 src/ml/logs
 src/ml/experiments
-src/models
+src/server/saved_models
+src/server/templates
 tests/random_stuff
 
 __pycache__
 .ipynb_checkpoints
 *.pyc
+
+back

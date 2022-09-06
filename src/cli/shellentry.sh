@@ -2,5 +2,5 @@
 sassbot()
 {
     local root=${SASSBOT:-"."}
-    python3.9 $root/cli $@
+    python3.9 $root/src/cli $@
 }

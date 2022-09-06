@@ -5,11 +5,12 @@ import tensorflow as tf
 import pandas as pd
 from pandas import DataFrame
 
-sys.path.append(str((Path(__file__).parent.parent.parent) / "back" / "src" / "ml"))
+from utils import ProjectTree, add_prj_module
+add_prj_module("ml")
 from data import load_df
 from model import make_model
 from layers import ProcessText
-from utils import ProjectTree
+
 
 def _train_model(dataset_name, out, start, stop, root):
     """ """
@@ -18,7 +19,10 @@ def _train_model(dataset_name, out, start, stop, root):
     print(f"Training model on {dataset_name} dataset...")
 
     df = load_df(dataset_name, shuffle=True)
+    # Gets 'start' to 'stop' rows of df
+    stop = len(df) if stop < 0 else stop
     df = df[start:stop]
+
     X, Y = df.text, df.sentiment
 
     model = make_model(
@@ -37,8 +41,8 @@ def _train_model(dataset_name, out, start, stop, root):
         epochs=12,
     )
 
-    tree.models.mkdir(exist_ok=True)
-    model.save(tree.models / out)
+    tree.saved_models.mkdir(exist_ok=True)
+    model.save(tree.saved_models / out)
 
     print(f"Saved trained model to {out}")
 

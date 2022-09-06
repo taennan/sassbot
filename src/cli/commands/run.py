@@ -18,4 +18,4 @@ def run(root):
     port_var = _read_env_file(tree.front_env).get("VITE_PORT")
     port_arg = f"--port {port_var}" if port_var is not None else ""
 
-    sh(f"{tree.python} -m flask run {port_arg}")
+    sh(f"FLASK_APP={tree.flask_app} {tree.python} -m flask run {port_arg}")
